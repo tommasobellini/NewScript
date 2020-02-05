@@ -22,7 +22,7 @@ sleep(3)
 # notnow = webdriver.find_element_by_css_selector('body > div:nth-child(13) > div > div > div > div.mt3GC > button.aOOlW.HoLwm')
 # notnow.click() #comment these last 2 lines out, if you don't get a pop up asking about notifications
 
-hashtag_list = ['travelblog', 'travelblogger', 'traveler']
+hashtag_list = ['love', 'instagood', 'photooftheday', 'fashion', 'beautiful','like4like', 'cute', 'travelblog', 'instadaily', 'followme', 'food', 'travelblogger', 'traveler']
 
 #prev_user_list = [] # if it's the first time you run it, use this line and comment the two below
 prev_user_list = pd.read_csv('20200205-141905_users_followed_list.csv', delimiter=',').iloc[:,1:2]  # useful to build a user log
@@ -63,7 +63,7 @@ for hashtag in hashtag_list:
 
                     # Liking the picture
                     button_like = webdriver.find_element_by_xpath(
-                        '/html/body/div[3]/div/div[2]/div/article/div[2]/section[1]/span[1]/button/span')
+                        '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[1]/button')
 
                     button_like.click()
                     likes += 1
@@ -75,9 +75,9 @@ for hashtag in hashtag_list:
                     if comm_prob > 7:
                         comments += 1
                         webdriver.find_element_by_xpath(
-                            '/html/body/div[3]/div/div[2]/div/article/div[2]/section[1]/span[2]/button/span').click()
+                            '/html/body/div[4]/div[2]/div/article/div[2]/section[1]/span[2]/button').click()
                         comment_box = webdriver.find_element_by_xpath(
-                            '/html/body/div[3]/div/div[2]/div/article/div[2]/section[3]/div/form/textarea')
+                            '/html/body/div[4]/div[2]/div/article/div[2]/section[3]/div/form/textarea')
 
                         if (comm_prob < 7):
                             comment_box.send_keys('Really cool!')
