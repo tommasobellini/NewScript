@@ -24,8 +24,8 @@ sleep(3)
 
 hashtag_list = ['travelblog', 'travelblogger', 'traveler']
 
-# prev_user_list = [] # if it's the first time you run it, use this line and comment the two below
-prev_user_list = pd.read_csv('20200205-134717_users_followed_list.csv', delimiter=',').iloc[:,1:2]  # useful to build a user log
+#prev_user_list = [] # if it's the first time you run it, use this line and comment the two below
+prev_user_list = pd.read_csv('20200205-141905_users_followed_list.csv', delimiter=',').iloc[:,1:2]  # useful to build a user log
 prev_user_list = list(prev_user_list['0'])
 
 new_followed = []
@@ -46,14 +46,14 @@ for hashtag in hashtag_list:
     try:
         for x in range(1, 200):
             username = webdriver.find_element_by_xpath(
-                '/html/body/div[3]/div/div[2]/div/article/header/div[2]/div[1]/div[1]/h2/a').text
+                '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[1]/h2/a').text
 
             if username not in prev_user_list:
                 # If we already follow, do not unfollow
                 print(webdriver.find_element_by_xpath(
                     '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text)
                 if webdriver.find_element_by_xpath(
-                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text == 'Follow':
+                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text == 'Segui':
 
                     webdriver.find_element_by_xpath(
                         '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').click()
