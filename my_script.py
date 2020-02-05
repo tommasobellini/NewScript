@@ -4,7 +4,7 @@ from time import sleep, strftime
 from random import randint
 import pandas as pd
 
-chromedriver_path = 'C:/Users/tbellini01/Downloads/chromedriver_win32/chromedriver.exe' # Change this to your own chromedriver path!
+chromedriver_path = '/usr/local/bin/chromedriver' # Change this to your own chromedriver path!
 webdriver = webdriver.Chrome(executable_path=chromedriver_path)
 sleep(2)
 webdriver.get('https://www.instagram.com/accounts/login/?source=auth_switcher')
@@ -15,18 +15,17 @@ username.send_keys('emarbarack35')
 password = webdriver.find_element_by_name('password')
 password.send_keys('Fuckinstagrambots')
 
-button_login = webdriver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(3) > button')
+button_login = webdriver.find_element_by_css_selector('#react-root > section > main > div > article > div > div:nth-child(1) > div > form > div:nth-child(4) > button')
 button_login.click()
 sleep(3)
 
-notnow = webdriver.find_element_by_css_selector('body > div:nth-child(13) > div > div > div > div.mt3GC > button.aOOlW.HoLwm')
-notnow.click() #comment these last 2 lines out, if you don't get a pop up asking about notifications
+# notnow = webdriver.find_element_by_css_selector('body > div:nth-child(13) > div > div > div > div.mt3GC > button.aOOlW.HoLwm')
+# notnow.click() #comment these last 2 lines out, if you don't get a pop up asking about notifications
 
 hashtag_list = ['travelblog', 'travelblogger', 'traveler']
 
-# prev_user_list = [] - if it's the first time you run it, use this line and comment the two below
-prev_user_list = pd.read_csv('20181203-224633_users_followed_list.csv', delimiter=',').iloc[:,
-                 1:2]  # useful to build a user log
+# prev_user_list = [] # if it's the first time you run it, use this line and comment the two below
+prev_user_list = pd.read_csv('20200205-134717_users_followed_list.csv', delimiter=',').iloc[:,1:2]  # useful to build a user log
 prev_user_list = list(prev_user_list['0'])
 
 new_followed = []
@@ -51,11 +50,13 @@ for hashtag in hashtag_list:
 
             if username not in prev_user_list:
                 # If we already follow, do not unfollow
+                print(webdriver.find_element_by_xpath(
+                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text)
                 if webdriver.find_element_by_xpath(
-                        '/html/body/div[3]/div/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text == 'Follow':
+                    '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').text == 'Follow':
 
                     webdriver.find_element_by_xpath(
-                        '/html/body/div[3]/div/div[2]/div/article/header/div[2]/div[1]/div[2]/button').click()
+                        '/html/body/div[4]/div[2]/div/article/header/div[2]/div[1]/div[2]/button').click()
 
                     new_followed.append(username)
                     followed += 1
